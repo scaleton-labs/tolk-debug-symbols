@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`collectDebugSymbols collects information about procedures and globals 1`] = `
+{
+  "globals": [
+    {
+      "index": 1,
+      "name": "a",
+    },
+    {
+      "index": 2,
+      "name": "b",
+    },
+    {
+      "index": 3,
+      "name": "c",
+    },
+  ],
+  "procedures": [
+    {
+      "cellHash": "b1b3726fb943fec8e144bb0e470a74a891fa4948fbc50b85ca1981e5444dfb4b",
+      "methodId": 0,
+      "name": "main",
+    },
+    {
+      "cellHash": "f8664b544b6b2451eb1826d6fc9c70fcd94f89a092391fa68355ea1c08b51c0d",
+      "methodId": 1,
+      "name": "throw_inline",
+    },
+    {
+      "cellHash": "3ef4fc929ecbb6c74979e7ec38a918e94c16496bb7c6ffa8a0905eb401b8f3be",
+      "methodId": 2,
+      "name": "throw_inline_ref",
+    },
+    {
+      "cellHash": "588d70db264b8d53c52e563524749977fd62985d6bda14e3a9b83dd5ba9c9041",
+      "methodId": 88,
+      "name": "throw_get",
+    },
+  ],
+}
+`;
