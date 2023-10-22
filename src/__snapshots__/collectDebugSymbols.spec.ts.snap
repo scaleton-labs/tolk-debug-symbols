@@ -28,7 +28,7 @@ exports[`collectDebugSymbols collects information about procedures and globals 1
       "name": "throw_inline",
     },
     {
-      "cellHash": "3ef4fc929ecbb6c74979e7ec38a918e94c16496bb7c6ffa8a0905eb401b8f3be",
+      "cellHash": "7219c22ada21ad364e5e0844e953e759e275b68603c645c29c15ffa57e2d47e3",
       "methodId": 2,
       "name": "throw_inline_ref",
     },
