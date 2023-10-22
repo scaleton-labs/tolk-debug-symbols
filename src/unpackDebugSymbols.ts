@@ -15,7 +15,7 @@ export function unpackDebugSymbols(rootCell: Cell): DebugSymbols {
     .loadDictDirect(Dictionary.Keys.Int(32), {
       serialize: () => {},
       parse: (src: Slice): Pick<ProcedureDescriptor, 'cellHash' | 'name'> => ({
-        cellHash: src.loadUintBig(256).toString(16),
+        cellHash: src.loadBuffer(32).toString('hex'),
         name: src.loadStringTail(),
       }),
     });
