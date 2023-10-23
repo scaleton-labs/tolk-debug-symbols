@@ -1384,7 +1384,7 @@ forget @proclist  forget @proccnt
 { }END <{
   76 SETCP
   @procmapdict @ ref,
-  @globvardict @ ref,
+  @globvardict @ dict,
 }> } : }END>
 { }END> b> } : }END>c
 { }END>c <s } : }END>s

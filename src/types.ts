@@ -9,7 +9,15 @@ export type ProcedureDescriptor = {
   name: string;
 };
 
+export type ConstantDescriptor = {
+  type: 'int' | 'slice';
+  name: string;
+  value: string;
+  declaration: string;
+};
+
 export type DebugSymbols = {
   procedures: ProcedureDescriptor[];
   globals: GlobalDescriptor[];
+  constants: ConstantDescriptor[];
 };

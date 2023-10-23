@@ -1,7 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`collectDebugSymbols collects information about constants 1`] = `
+{
+  "constants": [
+    {
+      "declaration": "0xBEEF",
+      "name": "h",
+      "type": "int",
+      "value": "48879",
+    },
+    {
+      "declaration": "-0xCAFE",
+      "name": "i",
+      "type": "int",
+      "value": "-51966",
+    },
+    {
+      "declaration": "-1000",
+      "name": "j",
+      "type": "int",
+      "value": "-1000",
+    },
+    {
+      "declaration": "1000",
+      "name": "k",
+      "type": "int",
+      "value": "1000",
+    },
+    {
+      "declaration": ""hello"",
+      "name": "l",
+      "type": "slice",
+      "value": "x{68656c6c6f}",
+    },
+    {
+      "declaration": ""cafe"s",
+      "name": "m",
+      "type": "slice",
+      "value": "x{cafe}",
+    },
+    {
+      "declaration": ""Ef8zMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzM0vF"a",
+      "name": "n",
+      "type": "slice",
+      "value": "x{9fe6666666666666666666666666666666666666666666666666666666666666667_}",
+    },
+    {
+      "declaration": ""ping"u",
+      "name": "o",
+      "type": "int",
+      "value": "1885957735",
+    },
+    {
+      "declaration": ""tranfser"h",
+      "name": "p",
+      "type": "int",
+      "value": "1951942752",
+    },
+    {
+      "declaration": ""tranfser"H",
+      "name": "q",
+      "type": "int",
+      "value": "52624272503553231905816075160042524215763620945865102247584047589936797967283",
+    },
+    {
+      "declaration": ""tranfser"c",
+      "name": "r",
+      "type": "int",
+      "value": "1025402358",
+    },
+  ],
+  "globals": [],
+  "procedures": [
+    {
+      "cellHash": "a0eacc9676d4e13d5bade93200eee2734baf0ad2256df4ee1983c5e6ce29c388",
+      "methodId": 0,
+      "name": "main",
+    },
+    {
+      "cellHash": "40956732df8dbebee9f697ef04dcfc498b671e7167ca2b898e85dbc737089012",
+      "methodId": 72319,
+      "name": "get_consts",
+    },
+  ],
+}
+`;
+
 exports[`collectDebugSymbols collects information about procedures and globals 1`] = `
 {
+  "constants": [],
   "globals": [
     {
       "index": 1,

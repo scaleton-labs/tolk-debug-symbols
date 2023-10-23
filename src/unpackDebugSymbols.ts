@@ -2,7 +2,9 @@ import { Cell, Dictionary, Slice } from '@ton/core';
 import { DebugSymbols, GlobalDescriptor, ProcedureDescriptor } from './types';
 import { DEBUG_MAGIC } from './constants';
 
-export function unpackDebugSymbols(rootCell: Cell): DebugSymbols {
+export function unpackDebugSymbols(
+  rootCell: Cell,
+): Pick<DebugSymbols, 'globals' | 'procedures'> {
   const root = rootCell.beginParse();
 
   if (root.loadUint(16) !== DEBUG_MAGIC) {
@@ -27,20 +29,22 @@ export function unpackDebugSymbols(rootCell: Cell): DebugSymbols {
     }),
   );
 
-  const globalsDict = root
-    .loadRef()
-    .beginParse()
-    .loadDictDirect(Dictionary.Keys.Uint(32), {
-      serialize: () => {},
-      parse: (src: Slice): string => src.loadStringTail(),
-    });
+  const globals: GlobalDescriptor[] = [];
+  const globalsDictRef = root.loadMaybeRef();
 
-  const globals = [...globalsDict].map(
-    ([index, name]): GlobalDescriptor => ({
-      index,
-      name,
-    }),
-  );
+  if (globalsDictRef) {
+    const globalsDict = globalsDictRef
+      .beginParse()
+      .loadDictDirect(Dictionary.Keys.Uint(32), {
+        serialize: () => {},
+        parse: (src: Slice): string => src.loadStringTail(),
+      });
+
+    for (const globalIndex of globalsDict.keys()) {
+      const globalName = globalsDict.get(globalIndex)!;
+      globals.push({ index: globalIndex, name: globalName });
+    }
+  }
 
   return {
     procedures,
