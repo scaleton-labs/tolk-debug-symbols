@@ -1,4 +1,4 @@
-import { CompilerConfig } from '@ton-community/func-js';
+import { CompilerConfig, SourceEntry } from '@ton-community/func-js';
 import { DebugSymbols } from './types';
 import { createDebugCompiler } from './createDebugCompiler';
 import { Cell } from '@ton/core';
@@ -6,7 +6,7 @@ import { unpackDebugSymbols } from './unpackDebugSymbols';
 
 export async function extractSymbolsFromCompiler(
   config: CompilerConfig,
-): Promise<Pick<DebugSymbols, 'globals' | 'procedures'>> {
+): Promise<[Pick<DebugSymbols, 'globals' | 'procedures'>, SourceEntry[]]> {
   const compiler = createDebugCompiler();
   const result = await compiler.compileFunc(config);
 
@@ -16,5 +16,5 @@ export async function extractSymbolsFromCompiler(
 
   const rootCell = Cell.fromBase64(result.codeBoc);
 
-  return unpackDebugSymbols(rootCell);
+  return [unpackDebugSymbols(rootCell), result.snapshot];
 }

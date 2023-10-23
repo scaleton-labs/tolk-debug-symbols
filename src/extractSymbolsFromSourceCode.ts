@@ -1,5 +1,5 @@
 import { ConstantDescriptor, DebugSymbols } from './types';
-import { CompilerConfig } from '@ton-community/func-js';
+import { SourceEntry } from '@ton-community/func-js';
 import Parser from 'web-tree-sitter';
 import { loadFunC } from '@scaleton/tree-sitter-func';
 import { sha256_sync } from '@ton/crypto';
@@ -7,14 +7,16 @@ import crc32 from 'buffer-crc32';
 import { Address, beginCell } from '@ton/core';
 
 export async function extractSymbolsFromSourceCode(
-  config: CompilerConfig,
+  snapshot: SourceEntry[],
 ): Promise<Pick<DebugSymbols, 'constants'>> {
   await Parser.init();
   const parser = new Parser();
 
   parser.setLanguage(await loadFunC());
 
-  const { rootNode } = parser.parse(Object.values(config.sources).join('\n'));
+  const { rootNode } = parser.parse(
+    snapshot.map((entry) => entry.content).join('\n'),
+  );
 
   const constants: ConstantDescriptor[] = [];
 

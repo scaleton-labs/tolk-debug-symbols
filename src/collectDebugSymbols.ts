@@ -6,8 +6,10 @@ import { extractSymbolsFromCompiler } from './extractSymbolsFromCompiler';
 export async function collectDebugSymbols(
   config: CompilerConfig,
 ): Promise<DebugSymbols> {
-  const symbolsFromCompiler = await extractSymbolsFromCompiler(config);
-  const symbolsFromSourceCode = await extractSymbolsFromSourceCode(config);
+  const [symbolsFromCompiler, snapshot] =
+    await extractSymbolsFromCompiler(config);
+
+  const symbolsFromSourceCode = await extractSymbolsFromSourceCode(snapshot);
 
   return {
     ...symbolsFromCompiler,
