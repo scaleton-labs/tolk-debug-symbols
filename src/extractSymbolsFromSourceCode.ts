@@ -1,35 +1,35 @@
-import { ConstantDescriptor, DebugSymbols } from './types';
-import { SourceEntry } from '@ton-community/func-js';
 import Parser from 'web-tree-sitter';
-import { loadFunC } from '@scaleton/tree-sitter-func';
+import { Address, beginCell } from '@ton/core';
+import { TolkResultSuccess } from '@ton/tolk-js';
 import { sha256_sync } from '@ton/crypto';
 import crc32 from 'buffer-crc32';
-import { Address, beginCell } from '@ton/core';
+import { ConstantDescriptor, DebugSymbols } from './types';
 
-export async function extractSymbolsFromSourceCode(
-  snapshot: SourceEntry[],
-): Promise<Pick<DebugSymbols, 'constants'>> {
+export async function createParser(): Promise<Parser> {
   await Parser.init();
   const parser = new Parser();
+  parser.setLanguage(
+    await Parser.Language.load(`${__dirname}/../tree-sitter-tolk.wasm`),
+  );
+  return parser;
+}
 
-  parser.setLanguage(await loadFunC());
+export async function extractSymbolsFromSourceCode(
+  snapshot: TolkResultSuccess['sourcesSnapshot'],
+): Promise<Pick<DebugSymbols, 'constants'>> {
+  const parser = await createParser();
 
   const { rootNode } = parser.parse(
-    snapshot.map((entry) => entry.content).join('\n'),
+    snapshot.map((entry) => entry.contents).join('\n'),
   );
 
   const constants: ConstantDescriptor[] = [];
 
-  for (const child of rootNode.children) {
-    if (child.type === 'constant_declarations') {
-      const constant_declaration = child.child(1)!;
-      const type = constant_declaration.childForFieldName('type')!.text as
-        | 'int'
-        | 'slice';
-      const name = constant_declaration.childForFieldName('name')!.text;
-      const declaration = constant_declaration
-        .childForFieldName('value')!
-        .child(0)!.text;
+  for (const node of rootNode.children) {
+    if (node.type === 'constant_declaration') {
+      const type = node.childForFieldName('type')!.text as 'int' | 'slice';
+      const name = node.childForFieldName('name')!.text;
+      const declaration = node.childForFieldName('value')!.child(0)!.text;
 
       let value = declaration;
 
@@ -61,7 +61,6 @@ export async function extractSymbolsFromSourceCode(
           const sign = value.startsWith('-') ? -1n : 1n;
           value = (BigInt(matches[1]) * sign).toString();
         } else {
-          console.log('Not supported:', value);
           continue;
         }
       }

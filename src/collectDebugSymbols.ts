@@ -1,10 +1,10 @@
-import { CompilerConfig } from '@ton-community/func-js';
+import { TolkCompilerConfig } from '@ton/tolk-js';
 import { DebugSymbols } from './types';
 import { extractSymbolsFromSourceCode } from './extractSymbolsFromSourceCode';
 import { extractSymbolsFromCompiler } from './extractSymbolsFromCompiler';
 
 export async function collectDebugSymbols(
-  config: CompilerConfig,
+  config: TolkCompilerConfig,
 ): Promise<DebugSymbols> {
   const [symbolsFromCompiler, snapshot] =
     await extractSymbolsFromCompiler(config);
