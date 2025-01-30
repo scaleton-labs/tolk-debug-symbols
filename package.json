@@ -1,6 +1,6 @@
 {
   "name": "@scaleton/tolk-debug-symbols",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",
   "license": "MIT",
