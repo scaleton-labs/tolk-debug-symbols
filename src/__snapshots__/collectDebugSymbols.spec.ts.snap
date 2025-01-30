@@ -148,7 +148,7 @@ exports[`collectDebugSymbols works with untyped constants 1`] = `
     {
       "declaration": "1000",
       "name": "a",
-      "type": null,
+      "type": "int",
       "value": "1000",
     },
   ],
