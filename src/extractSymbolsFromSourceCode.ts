@@ -27,9 +27,9 @@ export async function extractSymbolsFromSourceCode(
 
   for (const node of rootNode.children) {
     if (node.type === 'constant_declaration') {
-      const type = (node.childForFieldName('type')?.text ?? null) as 'int' | 'slice' | null;
       const name = node.childForFieldName('name')!.text;
-      const declaration = node.childForFieldName('value')!.child(0)!.text;
+      const type = (node.childForFieldName('type')?.text ?? null) as 'int' | 'slice' | null;
+      const declaration = node.childForFieldName('value')!.text;
 
       let value = declaration;
 

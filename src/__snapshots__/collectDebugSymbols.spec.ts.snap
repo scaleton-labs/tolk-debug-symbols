@@ -57,6 +57,18 @@ exports[`collectDebugSymbols collects information about constants 1`] = `
       "type": "int",
       "value": "1025402358",
     },
+    {
+      "declaration": "-0xCAFE",
+      "name": "i",
+      "type": "int",
+      "value": "-51966",
+    },
+    {
+      "declaration": "-1000",
+      "name": "j",
+      "type": "int",
+      "value": "-1000",
+    },
   ],
   "globals": [],
   "procedures": [
@@ -111,6 +123,41 @@ exports[`collectDebugSymbols collects information about procedures and globals 1
       "cellHash": "588d70db264b8d53c52e563524749977fd62985d6bda14e3a9b83dd5ba9c9041",
       "methodId": 88,
       "name": "throwGet",
+    },
+  ],
+}
+`;
+
+exports[`collectDebugSymbols works with empty functions 1`] = `
+{
+  "constants": [],
+  "globals": [],
+  "procedures": [
+    {
+      "cellHash": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "methodId": 0,
+      "name": "main",
+    },
+  ],
+}
+`;
+
+exports[`collectDebugSymbols works with untyped constants 1`] = `
+{
+  "constants": [
+    {
+      "declaration": "1000",
+      "name": "a",
+      "type": null,
+      "value": "1000",
+    },
+  ],
+  "globals": [],
+  "procedures": [
+    {
+      "cellHash": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+      "methodId": 0,
+      "name": "main",
     },
   ],
 }

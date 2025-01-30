@@ -67,4 +67,29 @@ describe('collectDebugSymbols', () => {
     const debugSymbols = await collectDebugSymbols(config);
     expect(debugSymbols).toMatchSnapshot();
   });
+
+  it('works with empty functions', async () => {
+    const config: TolkCompilerConfig = {
+      entrypointFileName: 'main.fc',
+      fsReadCallback: () => `
+        fun main() {}
+      `,
+    };
+
+    const debugSymbols = await collectDebugSymbols(config);
+    expect(debugSymbols).toMatchSnapshot();
+  });
+
+  it('works with untyped constants', async () => {
+    const config: TolkCompilerConfig = {
+      entrypointFileName: 'main.fc',
+      fsReadCallback: () => `
+        const a = 1000;
+        fun main() {}
+      `,
+    };
+
+    const debugSymbols = await collectDebugSymbols(config);
+    expect(debugSymbols).toMatchSnapshot();
+  });
 });
