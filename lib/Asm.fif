@@ -1581,7 +1581,7 @@ Fift-wordlist dup @oldcurrent ! @oldctx !
     drop tuck @procdict @ @procdictkeylen idict@ not
     { +": procedure declared but left undefined" abort } if
 
-    dup sbits { s>c } { ref@ } cond hashu <b swap 256 u, over $>B B, // code_hash + method_name
+    dup sbits { s>c } { dup srefs { ref@ } { s>c } cond } cond hashu <b swap 256 u, over $>B B, // code_hash + method_name
     2 pick // method_id
     @procmapadd
 

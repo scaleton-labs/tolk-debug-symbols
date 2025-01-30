@@ -10,7 +10,7 @@ export type ProcedureDescriptor = {
 };
 
 export type ConstantDescriptor = {
-  type: 'int' | 'slice';
+  type: 'int' | 'slice' | null;
   name: string;
   value: string;
   declaration: string;
