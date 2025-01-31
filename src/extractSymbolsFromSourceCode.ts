@@ -4,13 +4,12 @@ import { TolkResultSuccess } from '@ton/tolk-js';
 import { sha256_sync } from '@ton/crypto';
 import crc32 from 'buffer-crc32';
 import { ConstantDescriptor, DebugSymbols } from './types';
+import { loadTolk } from '@tonkite/tree-sitter-tolk';
 
 export async function createParser(): Promise<Parser> {
   await Parser.init();
   const parser = new Parser();
-  parser.setLanguage(
-    await Parser.Language.load(`${__dirname}/../tree-sitter-tolk.wasm`),
-  );
+  parser.setLanguage(await loadTolk());
   return parser;
 }
 
